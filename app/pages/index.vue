@@ -108,19 +108,15 @@ const benefits = [
 <template>
   <div>
     <!--
-      Hero: text column left, illustration right, at every width. The columns
-      are uneven below `lg` — the copy needs the room far more than the artwork
-      does, and an even split leaves the headline about six characters wide.
+      Hero: text column left, illustration right on desktop. Below `lg` the two
+      stack with the illustration on top — `order` puts it first there without
+      moving it in the DOM, so the reading order for screen readers and the
+      source stays headline -> pitch -> action.
     -->
     <BaseSection spacing="loose">
-      <div class="grid grid-cols-[1.5fr_1fr] items-center gap-4 sm:gap-8 lg:grid-cols-2 lg:gap-10">
-        <div class="flex flex-col items-start gap-4 text-left sm:gap-6 lg:gap-8">
-          <UBadge
-            variant="soft"
-            color="primary"
-            size="lg"
-            class="whitespace-nowrap text-[0.65rem] font-semibold sm:text-sm"
-          >
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
+        <div class="flex flex-col items-start gap-8 text-left">
+          <UBadge variant="soft" color="primary" size="lg" class="font-semibold">
             Gratis - Tanpa daftar akun
           </UBadge>
 
@@ -131,14 +127,14 @@ const benefits = [
             and only widens again at `xl` once the section hits its max width.
             Measured against "Maksimalkan Potensimu", the longer line:
 
-              390px  column 200 -> 20px   (two columns start at the smallest size)
+              390px  column 342 -> 30px
               640px  column 592 -> 48px
               768px  column 720 -> 60px
               1024px column 468 -> 40px   (drops: two columns start here)
               1280px column 532 -> 48px + tighter tracking (needs 527)
           -->
           <h1
-            class="text-xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl md:text-6xl lg:text-[2.5rem] xl:text-5xl xl:tracking-tighter"
+            class="text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-[2.5rem] xl:text-5xl xl:tracking-tighter"
           >
             <!--
               The `{{ ' ' }}` between words is deliberate: Vue's compiler drops
@@ -157,7 +153,7 @@ const benefits = [
             >
           </h1>
 
-          <p class="max-w-lg text-pretty text-xs leading-relaxed text-gray-300 sm:text-base lg:text-lg">
+          <p class="max-w-lg text-pretty text-lg leading-relaxed text-gray-300">
             Pahami diri minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
             dirimu terlalu berharga untuk dilewatkan.
           </p>
@@ -174,7 +170,7 @@ const benefits = [
             </UButton>
             <NuxtLink
               to="#cara-kerja"
-              class="text-base font-medium text-white underline-offset-4 transition-opacity hover:underline hover:opacity-80"
+              class="text-base font-medium text-white underline underline-offset-4 transition-opacity hover:opacity-80"
             >
               Lihat cara kerjanya
             </NuxtLink>
@@ -187,7 +183,10 @@ const benefits = [
           image. Explicit width/height reserve the space and prevent layout
           shift once it loads.
         -->
-        <div v-if="showHeroImage" class="relative mx-auto w-full max-w-lg lg:max-w-none">
+        <div
+          v-if="showHeroImage"
+          class="relative order-first mx-auto w-full max-w-lg lg:order-none lg:max-w-none"
+        >
           <img
             ref="heroImageEl"
             :src="HERO_IMAGE"
@@ -212,13 +211,8 @@ const benefits = [
             the section has not yet reached its max width, so the image column
             already touches the viewport edge and the card would spill past it.
           -->
-          <!--
-            Hidden below `sm`: the card is 190px wide and the illustration
-            column is narrower than that once the hero sits side by side, so it
-            would hang off the page edge and force a horizontal scrollbar.
-          -->
           <div
-            class="absolute -top-8 right-0 z-10 hidden sm:block sm:-right-4 lg:right-0 xl:-right-8"
+            class="absolute -top-8 right-0 z-10 sm:-right-4 lg:right-0 xl:-right-8"
           >
             <HeroProgressCard class="animate-float motion-reduce:animate-none" />
           </div>

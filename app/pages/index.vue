@@ -313,7 +313,7 @@ const benefits = [
                    below `lg` they would cut across the layout rather than
                    between the steps. -->
               <ol
-                class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10"
+                class="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10"
               >
                 <li
                   v-for="(step, index) in steps"

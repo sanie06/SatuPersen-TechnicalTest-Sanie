@@ -8,16 +8,16 @@ defineProps<{ stats: PlatformStat[] }>()
   <!--
     No individual cards: these sit inside a dark panel that carries its own
     glow, and boxing each figure would cover that glow up. Hairline dividers
-    separate the columns instead, and only from `sm` up — once the grid wraps to
-    two columns the dividers would land in the wrong places.
+    separate the columns instead, and only from `sm` up — in the 2x2 grid below
+    that they would cut across the layout rather than between the figures.
   -->
   <dl
-    class="grid grid-cols-1 gap-y-8 divide-y divide-white/10 sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-y-0 sm:divide-white/10"
+    class="grid grid-cols-2 gap-y-10 sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-white/10"
   >
     <div
       v-for="stat in stats"
       :key="stat.label"
-      class="flex flex-col items-center gap-1.5 px-2 pt-8 text-center first:pt-0 sm:px-6 sm:pt-0"
+      class="flex flex-col items-center gap-1.5 px-2 text-center sm:px-6"
     >
       <!-- `tabular-nums` keeps the width steady while the digits climb, so the
            column doesn't jitter mid-animation. -->

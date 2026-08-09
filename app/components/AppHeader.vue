@@ -52,10 +52,11 @@ const isPsikotesActive = computed(() => route.path.startsWith('/psikotes'))
 const NAV_BASE =
   'rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200'
 
+/** Colour alone marks the current page and hover — no background pill. */
 function navLinkClass(active: boolean) {
   return active
-    ? `${NAV_BASE} bg-brand-500/10 text-brand-500 hover:bg-brand-500/15`
-    : `${NAV_BASE} text-white/70 hover:bg-brand-500/10 hover:text-brand-500`
+    ? `${NAV_BASE} text-brand-500`
+    : `${NAV_BASE} text-white/70 hover:text-brand-500`
 }
 
 // Close the mobile drawer on navigation, otherwise it stays open over the new page.
@@ -91,10 +92,6 @@ watch(() => route.fullPath, () => (isMenuOpen.value = false))
             <UIcon name="i-heroicons-chevron-down-20-solid" class="h-4 w-4 opacity-60" />
           </button>
         </UDropdown>
-
-        <UButton to="/psikotes" color="primary" class="ml-2 font-semibold text-ink-950">
-          Mulai Tes
-        </UButton>
       </nav>
 
       <UButton
@@ -140,10 +137,6 @@ watch(() => route.fullPath, () => (isMenuOpen.value = false))
           <UIcon name="i-heroicons-gift-20-solid" class="h-4 w-4" />
           Psikotes Gratis
         </NuxtLink>
-
-        <UButton to="/psikotes" color="primary" block class="mt-3 font-semibold text-ink-950">
-          Mulai Tes
-        </UButton>
       </nav>
     </Transition>
   </header>

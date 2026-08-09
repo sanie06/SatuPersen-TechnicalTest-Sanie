@@ -12,8 +12,10 @@ defineProps<{ stats: PlatformStat[] }>()
     column is about 60px wide and a divider would crowd the digits.
 
     Four columns at every width. On a 320px screen that leaves roughly 60px
-    per figure, which is why the type steps down so far: the numbers drop from
-    48px to 18px and the labels to 10px so all four still fit side by side.
+    per figure, so the type steps down hard. The number is sized with `clamp`
+    rather than a fixed mobile value: a flat size large enough to read at 430px
+    overflows its column at 320px, and `clamp` lets it track the viewport
+    between a 22px floor and a 32px ceiling.
   -->
   <dl class="grid grid-cols-4 sm:divide-x sm:divide-white/10">
     <div
@@ -23,7 +25,9 @@ defineProps<{ stats: PlatformStat[] }>()
     >
       <!-- `tabular-nums` keeps the width steady while the digits climb, so the
            column doesn't jitter mid-animation. -->
-      <dt class="text-lg font-extrabold tabular-nums tracking-tight text-brand-500 sm:text-4xl lg:text-5xl">
+      <dt
+        class="text-[clamp(1.375rem,6.5vw,2rem)] font-extrabold tabular-nums tracking-tight text-brand-500 sm:text-4xl lg:text-5xl"
+      >
         <BaseCountUp :value="stat.value" />
       </dt>
       <dd class="text-[0.625rem] font-medium leading-tight text-white/60 sm:text-xs lg:text-sm">{{ stat.label }}</dd>

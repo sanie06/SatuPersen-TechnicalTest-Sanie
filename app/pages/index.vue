@@ -108,14 +108,19 @@ const benefits = [
 <template>
   <div>
     <!--
-      Hero: text column left, illustration right on desktop. Below `lg` the two
-      stack, illustration after the CTAs so the reading order stays
-      headline -> pitch -> action.
+      Hero: text column left, illustration right, at every width. The columns
+      are uneven below `lg` — the copy needs the room far more than the artwork
+      does, and an even split leaves the headline about six characters wide.
     -->
     <BaseSection spacing="loose">
-      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
-        <div class="flex flex-col items-start gap-8 text-left">
-          <UBadge variant="soft" color="primary" size="lg" class="font-semibold">
+      <div class="grid grid-cols-[1.5fr_1fr] items-center gap-4 sm:gap-8 lg:grid-cols-2 lg:gap-10">
+        <div class="flex flex-col items-start gap-4 text-left sm:gap-6 lg:gap-8">
+          <UBadge
+            variant="soft"
+            color="primary"
+            size="lg"
+            class="whitespace-nowrap text-[0.65rem] font-semibold sm:text-sm"
+          >
             Gratis - Tanpa daftar akun
           </UBadge>
 
@@ -126,14 +131,14 @@ const benefits = [
             and only widens again at `xl` once the section hits its max width.
             Measured against "Maksimalkan Potensimu", the longer line:
 
-              390px  column 342 -> 30px
+              390px  column 200 -> 20px   (two columns start at the smallest size)
               640px  column 592 -> 48px
               768px  column 720 -> 60px
               1024px column 468 -> 40px   (drops: two columns start here)
               1280px column 532 -> 48px + tighter tracking (needs 527)
           -->
           <h1
-            class="text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-[2.5rem] xl:text-5xl xl:tracking-tighter"
+            class="text-xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl md:text-6xl lg:text-[2.5rem] xl:text-5xl xl:tracking-tighter"
           >
             <!--
               The `{{ ' ' }}` between words is deliberate: Vue's compiler drops
@@ -152,7 +157,7 @@ const benefits = [
             >
           </h1>
 
-          <p class="max-w-lg text-pretty text-lg leading-relaxed text-gray-300">
+          <p class="max-w-lg text-pretty text-xs leading-relaxed text-gray-300 sm:text-base lg:text-lg">
             Pahami diri minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
             dirimu terlalu berharga untuk dilewatkan.
           </p>
@@ -207,8 +212,13 @@ const benefits = [
             the section has not yet reached its max width, so the image column
             already touches the viewport edge and the card would spill past it.
           -->
+          <!--
+            Hidden below `sm`: the card is 190px wide and the illustration
+            column is narrower than that once the hero sits side by side, so it
+            would hang off the page edge and force a horizontal scrollbar.
+          -->
           <div
-            class="absolute -top-8 right-0 z-10 sm:-right-4 lg:right-0 xl:-right-8"
+            class="absolute -top-8 right-0 z-10 hidden sm:block sm:-right-4 lg:right-0 xl:-right-8"
           >
             <HeroProgressCard class="animate-float motion-reduce:animate-none" />
           </div>

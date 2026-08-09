@@ -309,43 +309,7 @@ const benefits = [
 
               <!-- No per-step cards: boxing them on top of the dark panel would
                    cover the glow, the same way it did in Fact Check. -->
-              <!--
-                One swipeable row below `lg`, a four-column grid above it.
-                Four cards abreast on a 390px screen leaves ~90px each, which
-                is too narrow to read, so the row scrolls instead of shrinking.
-
-                `-mx-6 px-6` lets the strip bleed to the panel edges so a card
-                is visibly cut off at the right — the cue that there is more to
-                swipe to. `tabindex` because a scroll container is not reachable
-                by keyboard on its own.
-
-                Dividers only once all four sit in one row; in the scrolling
-                strip they would trail off the side.
-              -->
-              <ol
-                :tabindex="0"
-                class="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 sm:px-12 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0 lg:divide-x lg:divide-white/10"
-              >
-                <li
-                  v-for="(step, index) in steps"
-                  :key="step.title"
-                  class="flex w-[78%] shrink-0 snap-start flex-col gap-4 sm:w-[42%] lg:w-auto lg:shrink lg:px-6 lg:first:pl-0 lg:last:pr-0"
-                >
-                  <div class="flex items-center gap-3">
-                    <span
-                      class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/15 text-sm font-extrabold tabular-nums text-brand-500"
-                    >
-                      {{ String(index + 1).padStart(2, '0') }}
-                    </span>
-                    <StepIcon :icon="step.icon" :image="step.image" />
-                  </div>
-
-                  <div class="flex flex-col gap-2">
-                    <h3 class="text-lg font-bold">{{ step.title }}</h3>
-                    <p class="text-sm leading-relaxed text-white/60">{{ step.description }}</p>
-                  </div>
-                </li>
-              </ol>
+              <StepGrid :steps="steps" />
             </div>
           </div>
         </BaseReveal>

@@ -153,7 +153,7 @@ const benefits = [
           </h1>
 
           <p class="max-w-lg text-pretty text-lg leading-relaxed text-gray-300">
-            Pahami diri sani bukan micheng minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
+            Pahami diri minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
             dirimu terlalu berharga untuk dilewatkan.
           </p>
 
@@ -309,16 +309,27 @@ const benefits = [
 
               <!-- No per-step cards: boxing them on top of the dark panel would
                    cover the glow, the same way it did in Fact Check. -->
-              <!-- Dividers only once all four sit in one row; in the 2x2 grid
-                   below `lg` they would cut across the layout rather than
-                   between the steps. -->
+              <!--
+                One swipeable row below `lg`, a four-column grid above it.
+                Four cards abreast on a 390px screen leaves ~90px each, which
+                is too narrow to read, so the row scrolls instead of shrinking.
+
+                `-mx-6 px-6` lets the strip bleed to the panel edges so a card
+                is visibly cut off at the right — the cue that there is more to
+                swipe to. `tabindex` because a scroll container is not reachable
+                by keyboard on its own.
+
+                Dividers only once all four sit in one row; in the scrolling
+                strip they would trail off the side.
+              -->
               <ol
-                class="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10"
+                :tabindex="0"
+                class="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 sm:px-12 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0 lg:divide-x lg:divide-white/10"
               >
                 <li
                   v-for="(step, index) in steps"
                   :key="step.title"
-                  class="flex flex-col gap-4 lg:px-6 lg:first:pl-0 lg:last:pr-0"
+                  class="flex w-[78%] shrink-0 snap-start flex-col gap-4 sm:w-[42%] lg:w-auto lg:shrink lg:px-6 lg:first:pl-0 lg:last:pr-0"
                 >
                   <div class="flex items-center gap-3">
                     <span

@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "question": "Saya lebih suka menghabiskan waktu luang di keramaian daripada sendirian.",
+    "trait": "extraversion",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Saya mudah memulai obrolan dengan orang yang baru saya temui.",
+    "trait": "extraversion",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Saya senang mencoba ide atau pengalaman yang benar-benar baru bagi saya.",
+    "trait": "openness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Saya sering memikirkan hal-hal abstrak seperti seni, filsafat, atau makna hidup.",
+    "trait": "openness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Saya terbiasa menyelesaikan pekerjaan jauh sebelum tenggat waktunya.",
+    "trait": "conscientiousness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Saya menjaga barang dan jadwal saya tetap rapi tanpa perlu diingatkan.",
+    "trait": "conscientiousness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Saya berusaha memahami sudut pandang orang lain sebelum menilai mereka.",
+    "trait": "agreeableness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Saya rela mengalah demi menjaga suasana tetap nyaman bagi semua orang.",
+    "trait": "agreeableness",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Saya tetap tenang ketika rencana yang sudah saya susun tiba-tiba berubah.",
+    "trait": "neuroticism",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Saya jarang memikirkan ulang kesalahan kecil saya sampai berlarut-larut.",
+    "trait": "neuroticism",
+    "options": [
+      { "label": "Sangat Setuju", "score": 4 },
+      { "label": "Setuju", "score": 3 },
+      { "label": "Tidak Setuju", "score": 2 },
+      { "label": "Sangat Tidak Setuju", "score": 1 }
+    ]
+  }
+]

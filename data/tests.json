@@ -1,0 +1,117 @@
+[
+  {
+    "id": "big-five",
+    "title": "Tes Kepribadian Big Five (OCEAN)",
+    "category": "Kepribadian",
+    "image": "/images/big-five.png",
+    "durationMinutes": 5,
+    "totalQuestions": 10,
+    "isActive": true,
+    "description": "Kenali lima dimensi utama kepribadianmu berdasarkan model psikologi paling teruji secara ilmiah.",
+    "about": "Tes Big Five, atau model OCEAN, disusun berdasarkan penelitian psikologi kepribadian yang berkembang sejak dekade 1980-an. Alih-alih menempatkanmu ke dalam satu tipe, model ini memetakan lima dimensi yang berdiri sendiri — keterbukaan, kehati-hatian, ekstraversi, keramahan, dan stabilitas emosi — masing-masing sebagai rentang, bukan kotak. Karena itu Big Five paling banyak dipakai di dunia akademik dibanding model kepribadian populer lain. Hasil tes ini bersifat edukatif dan bukan diagnosis profesional; ia tidak menggantikan konsultasi dengan psikolog berlisensi.",
+    "faq": [
+      {
+        "question": "Apa itu Tes Big Five?",
+        "answer": "Big Five adalah model yang memetakan kepribadian ke dalam lima dimensi utama, sering disingkat OCEAN. Model ini dikembangkan dari penelitian panjang para psikolog kepribadian dan menjadi kerangka yang paling banyak dipakai di dunia akademik."
+      },
+      {
+        "question": "Ada berapa dimensi dalam Big Five?",
+        "answer": "Lima. Keterbukaan (seberapa terbuka pada ide dan pengalaman baru), Kehati-hatian (seberapa terstruktur dan disiplin), Ekstraversi (seberapa besar energi tumbuh dari interaksi), Keramahan (kecenderungan bekerja sama dan berempati), dan Stabilitas Emosi (seberapa tenang menghadapi tekanan). Setiap dimensi berdiri sendiri, jadi kamu punya posisi pada kelimanya sekaligus."
+      },
+      {
+        "question": "Apa manfaat mengetahui profil Big Five saya?",
+        "answer": "Mengenali kecenderunganmu membantu memahami kekuatan alami dan area yang perlu dikembangkan, menyesuaikan cara berkomunikasi dengan orang yang berbeda, serta memberi gambaran awal untuk pengembangan diri dan arah karier. Ingat, ini titik awal refleksi — bukan label permanen."
+      }
+    ]
+  },
+  {
+    "id": "mbti",
+    "title": "Tes 16 Kepribadian (MBTI)",
+    "category": "Kepribadian",
+    "image": "/images/mbti.png",
+    "durationMinutes": 10,
+    "totalQuestions": 20,
+    "isActive": false,
+    "description": "Temukan dari 16 tipe kepribadian mana yang paling menggambarkan caramu berpikir dan mengambil keputusan."
+  },
+  {
+    "id": "love-language",
+    "title": "Tes Love Language",
+    "category": "Relasi",
+    "image": "/images/love-language.webp",
+    "durationMinutes": 7,
+    "totalQuestions": 15,
+    "isActive": false,
+    "description": "Pahami cara kamu memberi dan menerima kasih sayang agar hubunganmu terasa lebih utuh."
+  },
+  {
+    "id": "attachment-style",
+    "title": "Tes Attachment Style",
+    "category": "Relasi",
+    "image": "/images/attachment-style.png",
+    "durationMinutes": 8,
+    "totalQuestions": 18,
+    "isActive": false,
+    "description": "Cari tahu pola kelekatanmu dalam hubungan: aman, cemas, menghindar, atau campuran."
+  },
+  {
+    "id": "enneagram",
+    "title": "Tes Enneagram",
+    "category": "Kepribadian",
+    "image": "/images/enneagram.webp",
+    "durationMinutes": 12,
+    "totalQuestions": 24,
+    "isActive": false,
+    "description": "Temukan satu dari sembilan tipe Enneagram yang paling menggambarkan motivasi terdalammu."
+  },
+  {
+    "id": "minat-bakat-karier",
+    "title": "Tes Minat Bakat Karier",
+    "category": "Minat & Karier",
+    "image": "/images/minat-bakat-karier.png",
+    "durationMinutes": 6,
+    "totalQuestions": 12,
+    "isActive": false,
+    "description": "Petakan minat dan bakatmu ke jalur karier yang paling terasa pas untuk dijalani jangka panjang."
+  },
+  {
+    "id": "skrining-depresi",
+    "title": "Tes Skrining Gejala Depresi Awal",
+    "category": "Kesehatan Mental",
+    "image": "/images/skrining-depresi.png",
+    "durationMinutes": 4,
+    "totalQuestions": 10,
+    "isActive": false,
+    "description": "Kenali tanda-tanda awal depresi lebih dini supaya kamu tahu kapan waktunya mencari bantuan."
+  },
+  {
+    "id": "burnout",
+    "title": "Tes Burnout",
+    "category": "Kesehatan Mental",
+    "image": "/images/burnout.png",
+    "durationMinutes": 6,
+    "totalQuestions": 14,
+    "isActive": false,
+    "description": "Bedakan lelah biasa dengan burnout sebelum semangat kerjamu benar-benar habis."
+  },
+  {
+    "id": "red-flag-check",
+    "title": "Apakah Saya Orang Toxic? Red Flag Check",
+    "category": "Relasi",
+    "image": "/images/red-flag-check.png",
+    "durationMinutes": 5,
+    "totalQuestions": 10,
+    "isActive": false,
+    "description": "Cek kebiasaan yang tanpa sadar melukai orang terdekatmu, dan mana yang perlu kamu perbaiki."
+  },
+  {
+    "id": "minat-bakat-umum",
+    "title": "Tes Minat Bakat Umum",
+    "category": "Minat & Karier",
+    "image": "/images/minat-bakat-umum.png",
+    "durationMinutes": 10,
+    "totalQuestions": 20,
+    "isActive": false,
+    "description": "Cari tahu bidang mana yang paling menonjol dari dirimu sebelum menentukan langkah berikutnya."
+  }
+]

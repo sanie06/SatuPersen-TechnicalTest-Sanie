@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-white antialiased;
+    /* Two soft brand glows behind the page, fixed so they don't scroll away. */
+    background-image:
+      radial-gradient(60rem 40rem at 15% -10%, rgba(245, 197, 24, 0.14), transparent 60%),
+      radial-gradient(50rem 35rem at 100% 0%, rgba(22, 33, 62, 0.9), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-ink-950;
+  }
+}
+
+@layer components {
+  /* Glassmorphism surface used by cards and overlay panels. */
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:bg-white/[0.07] hover:shadow-2xl hover:shadow-brand-500/10;
+  }
+
+  /*
+   * Marquee track. Paired with a track that contains its content exactly twice
+   * (see BaseMarquee.vue) — shifting by -50% lands copy two where copy one
+   * began, so the restart is invisible.
+   */
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 30s) linear infinite;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-300 via-brand-500 to-brand-400 bg-clip-text text-transparent;
+  }
+
+  /*
+   * Hero headline glow, per word: hovering one word lights only that word.
+   * The colours are swapped — white words take a warm brand halo, the
+   * gradient words take a white one — so each lights in the other's colour.
+   *
+   * `inline-block` is what lets the word lift; inline elements ignore
+   * transforms. Words still wrap normally because each is its own box.
+   */
+  .headline-word {
+    @apply inline-block;
+    transition:
+      text-shadow 250ms ease-out,
+      filter 250ms ease-out,
+      transform 250ms ease-out;
+  }
+
+  .headline-word:hover {
+    transform: translateY(-2px);
+  }
+
+  .glow-warm:hover {
+    text-shadow:
+      0 0 20px rgba(245, 197, 24, 0.6),
+      0 0 42px rgba(245, 197, 24, 0.3);
+  }
+
+  /*
+   * The brand words use a solid colour rather than the gradient fill used
+   * elsewhere. A gradient is laid out per element box, so once the headline was
+   * split into one span per word each word restarted the ramp and the phrase
+   * broke into visible blocks of colour. Solid keeps them consistent — and
+   * lets this use the cheaper `text-shadow` instead of `drop-shadow`.
+   */
+  .glow-cool:hover {
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.65),
+      0 0 42px rgba(255, 255, 255, 0.32);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

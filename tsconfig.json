@@ -1,0 +1,7 @@
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  // Nuxt 3.21 emits a single generated tsconfig. The split
+  // tsconfig.app/server/shared/node references used by the Nuxt 4 scaffold
+  // are not produced here, so extend the generated one directly.
+  "extends": "./.nuxt/tsconfig.json"
+}

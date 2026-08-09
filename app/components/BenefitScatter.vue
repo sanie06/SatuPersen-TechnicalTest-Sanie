@@ -37,29 +37,16 @@ const { el, isVisible, isReady } = useReveal({ threshold: 0.2 })
 </script>
 
 <template>
-  <!--
-    One horizontal row at every width. Below `lg` it scrolls: four 208px cards
-    need 850px of room and a phone offers about 358px, so fitting all four on
-    screen at once would leave roughly 85px each — narrower than the words in
-    them. The row keeps the desktop shape and readable text; the trade is a
-    swipe.
-
-    The negative margin must match `BaseSection`'s gutter exactly — `px-4
-    sm:px-6`. Bleeding wider than the gutter pushes a horizontal scrollbar onto
-    the whole page, which is what `-mx-6` did at 390px where the gutter is only
-    16px.
-  -->
   <div
     ref="el"
-    :tabindex="0"
-    class="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 pt-2 sm:-mx-6 sm:px-6 lg:relative lg:mx-auto lg:block lg:h-[19rem] lg:max-w-4xl lg:overflow-visible lg:px-0 lg:pb-0 lg:pt-0"
+    class="grid grid-cols-2 items-start gap-3 sm:gap-4 lg:relative lg:mx-auto lg:block lg:h-[19rem] lg:max-w-4xl"
   >
     <div
       v-for="(benefit, index) in benefits"
       :key="benefit.title"
       :class="[
         layout[index]?.position,
-        'w-52 shrink-0 snap-start lg:absolute lg:w-64',
+        'lg:absolute lg:w-64',
         // Before the observer runs, and under reduced motion, the cards render
         // in place. Only an armed observer is allowed to hide them.
         isReady && !isVisible ? 'opacity-0' : '',

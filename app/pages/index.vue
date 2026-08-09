@@ -325,7 +325,7 @@ const benefits = [
       <BaseReveal>
         <BaseSectionHeading
           eyebrow="Kenapa Satu Persen"
-          title="Dibuat untuk dipakai, bukan untuk dijual"
+          title="Akses gratis ke instrumen psikologi berkualitas, kapan pun kamu butuh arahan."
           subtitle="Tujuannya sederhana: bantu kamu memahami diri sendiri sedikit lebih baik setiap hari."
           class="mb-12"
         />

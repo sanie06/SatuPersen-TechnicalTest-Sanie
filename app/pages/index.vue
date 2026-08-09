@@ -153,7 +153,7 @@ const benefits = [
           </h1>
 
           <p class="max-w-lg text-pretty text-lg leading-relaxed text-gray-300">
-            Pahami minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
+            Pahami diri sani bukan micheng minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
             dirimu terlalu berharga untuk dilewatkan.
           </p>
 

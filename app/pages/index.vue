@@ -1,108 +1,18 @@
 <script setup lang="ts">
 const { stats } = usePlatformStats()
-
-/**
- * Hero illustration. Served from `public/`, so swapping the file is enough —
- * change the extension here if you upload a .webp/.jpg/.svg instead.
- */
-const HERO_IMAGE = '/images/hero.png'
+const { heroImage, ctaImage, headlineWords, taglines, steps, benefits } = useLandingContent()
 
 const {
   imageEl: heroImageEl,
   showImage: showHeroImage,
   markFailed: markHeroFailed,
-} = useImageFallback(HERO_IMAGE)
-
-/** Illustration paired with the closing call to action. */
-const HERO2_IMAGE = '/images/hero2.png'
+} = useImageFallback(heroImage)
 
 const {
   imageEl: ctaImageEl,
   showImage: showCtaImage,
   markFailed: markCtaImageFailed,
-} = useImageFallback(HERO2_IMAGE)
-
-/**
- * Headline, split per word so each lights up on its own hover. `brand: true`
- * marks the yellow words — those glow white, the white ones glow yellow, so
- * each lights in the other's colour.
- *
- * `breakAfter` forces the two-line shape rather than letting the text wrap
- * wherever the column happens to end. Kept as data instead of a literal `<br>`
- * so the per-word hover still works.
- */
-const headlineWords = [
-  { text: 'Kenali' },
-  { text: 'Dirimu', brand: true, breakAfter: true },
-  { text: 'Maksimalkan' },
-  { text: 'Potensimu', brand: true },
-]
-
-/**
- * Scrolling tagline strip between the hero and Fact Check. `accent` is the part
- * rendered in brand colour; `brand-800` rather than `brand-500`: the strip is
- * white, and measured on it brand-500 gives 1.63:1 and brand-700 only 3.77:1 —
- * which passes for large bold text but fails at the 16px mobile size. brand-800
- * clears 4.5:1 at both sizes.
- */
-const taglines = [
-  { lead: '1% Better', accent: 'Everyday' },
-  { lead: 'Achieving and Maintaining', accent: 'The Good Life' },
-  { lead: 'Know Yourself', accent: 'Better' },
-]
-
-const steps = [
-  {
-    icon: 'i-heroicons-pencil-square-20-solid',
-    // Custom artwork under `public/`. Until the file exists the Heroicon above
-    // is used instead, so icons can be swapped in one at a time.
-    image: '/images/icons/jawab-dengan-jujur.png',
-    title: 'Jawab dengan Jujur',
-    description:
-      'Isi setiap pertanyaan sesuai kondisi kamu yang sebenarnya, bukan jawaban yang dianggap ideal.',
-  },
-  {
-    icon: 'i-heroicons-moon-20-solid',
-    title: 'Cari Tempat yang Tenang',
-    description:
-      'Luangkan waktu di tempat yang nyaman supaya kamu bisa fokus dan tidak terburu-buru.',
-  },
-  {
-    icon: 'i-heroicons-light-bulb-20-solid',
-    title: 'Refleksikan Hasilnya',
-    description:
-      'Setelah hasil keluar, coba pikirkan bagian mana yang paling relevan dengan kehidupanmu sehari-hari.',
-  },
-  {
-    icon: 'i-heroicons-chat-bubble-left-right-20-solid',
-    title: 'Diskusikan Bila Perlu',
-    description:
-      'Ceritakan hasilnya ke orang terdekat, atau lanjutkan ke psikolog profesional kalau butuh pendampingan lebih jauh.',
-  },
-]
-
-const benefits = [
-  {
-    icon: 'i-heroicons-banknotes-20-solid',
-    title: 'Gratis selamanya',
-    description: 'Tanpa biaya tersembunyi dan tanpa perlu memasukkan data kartu.',
-  },
-  {
-    icon: 'i-heroicons-bolt-20-solid',
-    title: 'Tanpa daftar akun',
-    description: 'Langsung kerjakan. Tidak ada formulir pendaftaran yang menghalangi.',
-  },
-  {
-    icon: 'i-heroicons-shield-check-20-solid',
-    title: 'Jawaban tersimpan aman',
-    description: 'Progresmu disimpan di browser sendiri, bukan di server kami.',
-  },
-  {
-    icon: 'i-heroicons-academic-cap-20-solid',
-    title: 'Basis ilmiah',
-    description: 'Disusun mengacu pada model psikologi yang dipakai luas di dunia akademik.',
-  },
-]
+} = useImageFallback(ctaImage)
 </script>
 
 <template>
@@ -189,7 +99,7 @@ const benefits = [
         >
           <img
             ref="heroImageEl"
-            :src="HERO_IMAGE"
+            :src="heroImage"
             alt="Ilustrasi orang mengamati dirinya sendiri lewat kaca pembesar"
             width="539"
             height="463"
@@ -313,7 +223,7 @@ const benefits = [
 
               <!-- No per-step cards: boxing them on top of the dark panel would
                    cover the glow, the same way it did in Fact Check. -->
-              <StepGrid :steps="steps" />
+              <StepList :steps="steps" />
             </div>
           </div>
         </BaseReveal>
@@ -330,7 +240,7 @@ const benefits = [
           class="mb-12"
         />
 
-        <BenefitScatter :benefits="benefits" />
+        <BenefitCards :benefits="benefits" />
       </BaseReveal>
     </BaseSection>
 
@@ -385,7 +295,7 @@ const benefits = [
               />
               <img
                 ref="ctaImageEl"
-                :src="HERO2_IMAGE"
+                :src="ctaImage"
                 alt=""
                 width="522"
                 height="478"

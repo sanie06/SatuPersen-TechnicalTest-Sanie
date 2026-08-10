@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { LandingStep } from '~/types'
+
 /**
  * The "cara memaksimalkan hasil" steps.
  *
@@ -10,9 +12,7 @@
  * rendered twice — the `lg:` variants below beat the collapsed state because
  * Tailwind emits its breakpoint variants after the base utilities.
  */
-defineProps<{
-  steps: readonly { icon: string; image?: string; title: string; description: string }[]
-}>()
+defineProps<{ steps: readonly LandingStep[] }>()
 
 const isOpen = ref(false)
 </script>

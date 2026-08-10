@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { Benefit } from '~/types'
+
 /**
- * The four "kenapa Satu Persen" cards, dealt out as a scattered cascade.
+ * The four "kenapa Satu Persen" selling points.
  *
  * Two layouts in one set of elements: a plain stack/grid up to `md`, and the
  * scatter from `lg`. The scatter is deliberately not mobile — overlapping
  * rotated cards on a 390px screen bury each other's text, and the PRD is
  * explicit about mobile-first.
  */
-defineProps<{
-  benefits: readonly { icon: string; title: string; description: string }[]
-}>()
+defineProps<{ benefits: readonly Benefit[] }>()
 
 /**
  * Where each card lands once the scatter kicks in: stepping right, with the

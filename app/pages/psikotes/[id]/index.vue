@@ -71,11 +71,6 @@ const guidelines = computed(() => [
   'Begitu soal terakhir terjawab atau waktu habis, ringkasan hasilmu langsung muncul.',
 ])
 
-/** `UAccordion` wants `label`/`content`; the model stores question/answer. */
-const faqItems = computed(() =>
-  (test.faq ?? []).map((entry) => ({ label: entry.question, content: entry.answer })),
-)
-
 useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
 </script>
 
@@ -123,28 +118,7 @@ useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
         </p>
       </div>
 
-      <!--
-        Deliberately not solid yellow: the "Mulai" button directly below is the
-        one thing on this page that should pull the eye, and four yellow blocks
-        above it would out-shout it. These stay dark with a brand-tinted
-        gradient and yellow icons — present, but subordinate to the CTA.
-      -->
-      <dl class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div
-          v-for="fact in facts"
-          :key="fact.label"
-          class="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-brand-500/[0.09] to-white/[0.02] p-4 transition duration-300 hover:border-brand-500/40 hover:from-brand-500/[0.16]"
-        >
-          <dt class="flex items-center gap-1.5 text-xs text-white/50">
-            <UIcon
-              :name="fact.icon"
-              class="h-4 w-4 text-brand-500/70 transition-colors duration-300 group-hover:text-brand-500"
-            />
-            {{ fact.label }}
-          </dt>
-          <dd class="mt-2 text-lg font-bold">{{ fact.value }}</dd>
-        </div>
-      </dl>
+      <TestFactGrid :facts="facts" />
 
       <!-- Resume banner: only when a partly-finished attempt is in storage. -->
       <div
@@ -222,24 +196,7 @@ useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
         </UButton>
       </div>
 
-      <!-- Panduan Pengisian -->
-      <section class="flex flex-col gap-4">
-        <h2 class="text-xl font-bold">Panduan Pengisian</h2>
-        <ol class="flex list-none flex-col gap-3">
-          <li
-            v-for="(guideline, index) in guidelines"
-            :key="guideline"
-            class="flex items-start gap-3 text-sm leading-relaxed text-white/70"
-          >
-            <span
-              class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-500/15 text-xs font-extrabold text-brand-500"
-            >
-              {{ index + 1 }}
-            </span>
-            <span>{{ guideline }}</span>
-          </li>
-        </ol>
-      </section>
+      <TestGuidelines :guidelines="guidelines" />
 
       <!--
         Background on the test itself. A brand-tinted dark panel rather than
@@ -259,45 +216,7 @@ useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
         </p>
       </section>
 
-      <!-- FAQ -->
-      <section v-if="faqItems.length" class="flex flex-col gap-4">
-        <h2 class="text-xl font-bold">FAQ</h2>
-        <!--
-          The slot below must contain exactly ONE root node and nothing else,
-          not even a comment. `DisclosureButton` renders as a template and
-          forwards its click, id and aria props onto that single child; a second
-          node makes it throw. Comments survive in dev and are stripped from the
-          production build, so that failure shows up in `npm run dev` only.
-        -->
-        <UAccordion
-          :items="faqItems"
-          :ui="{
-            wrapper: 'flex flex-col w-full',
-            item: {
-              base: 'text-sm leading-relaxed text-white/70',
-              padding: 'pb-4 pt-1',
-            },
-          }"
-        >
-          <template #default="{ item, open }">
-            <UButton
-              variant="ghost"
-              color="white"
-              class="w-full justify-between border-b border-white/10 py-4 text-left"
-              :ui="{ rounded: 'rounded-none' }"
-            >
-              <span class="font-bold text-white">{{ item.label }}</span>
-              <UIcon
-                name="i-heroicons-chevron-down-20-solid"
-                :class="[
-                  'h-5 w-5 shrink-0 text-white/50 transition-transform duration-200',
-                  open && 'rotate-180',
-                ]"
-              />
-            </UButton>
-          </template>
-        </UAccordion>
-      </section>
+      <TestFaqSection :entries="test.faq ?? []" />
 
       <p v-if="!isPlayable" class="text-center text-sm text-white/50">
         Tes ini masih dalam pengembangan.

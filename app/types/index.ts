@@ -2,3 +2,4 @@
 export * from './test'
 export * from './question'
 export * from './attempt'
+export * from './landing'

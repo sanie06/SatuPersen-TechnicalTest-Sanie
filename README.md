@@ -144,19 +144,7 @@ Mengikuti panduan brand pada PRD: kuning `#F5C518` sebagai aksen, latar gelap `#
 
 ## Deployment
 
-Output-nya statis murni, jadi bisa dihosting di mana saja.
-
-**Vercel** — import repository, lalu gunakan:
-
-- Build command: `npm run generate`
-- Output directory: `.output/public`
-
-**Netlify** — sama:
-
-- Build command: `npm run generate`
-- Publish directory: `.output/public`
-
-Setelah live, isi tautannya di bagian atas README ini.
+**Vercel** — https://satu-persen-technical-test-sanie.vercel.app/
 
 ---
 

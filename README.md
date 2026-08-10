@@ -2,7 +2,7 @@
 
 MVP platform psikotes gratis untuk Satu Persen (SP Collective). Dibangun dengan Nuxt, Nuxt UI, dan Tailwind CSS, dengan struktur folder mengikuti pola MVVM.
 
-**Live demo:** _(isi setelah deploy — lihat bagian [Deployment](#deployment))_
+**Live demo:** _(#deployment))_
 
 ---
 

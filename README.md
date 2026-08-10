@@ -20,12 +20,13 @@ npm run dev
 
 Perintah lain:
 
-| Perintah | Fungsi |
-|---|---|
-| `npm run dev` | Development server dengan hot reload. |
-| `npm run generate` | Build statis (SSG). Output ada di `.output/public`. |
-| `npm run preview` | Menyajikan hasil build statis secara lokal. |
-| `npm run typecheck` | Mengecek seluruh tipe TypeScript (`vue-tsc`). |
+| Perintah            | Fungsi                                              |
+| ------------------- | --------------------------------------------------- |
+| `npm run dev`       | Development server dengan hot reload.               |
+| `npm run generate`  | Build statis (SSG). Output ada di `.output/public`. |
+| `npm run preview`   | Menyajikan hasil build statis secara lokal.         |
+| `npm run format`    | Prettier + pengurutan class Tailwind                |
+| `npm run typecheck` | Mengecek seluruh tipe TypeScript (`vue-tsc`).       |
 
 ---
 
@@ -99,7 +100,7 @@ Pemisahannya dibuat tegas supaya logika bisa diuji dan dipakai ulang tanpa menye
 - `BaseProgressBar` dipakai untuk tiga hal sekaligus: progress pengerjaan, visualisasi skor total, dan bar per dimensi.
 - `BaseSection` menghilangkan pengulangan `mx-auto max-w-6xl px-4 ...` di setiap halaman.
 - Warna brand hanya didefinisikan di `tailwind.config.ts`, lalu di-map ke Nuxt UI lewat `app.config.ts`, sehingga seluruh `UButton`/`UBadge`/`UInput` otomatis ikut tanpa prop warna satu per satu.
-- Rute yang di-*prerender* dibaca langsung dari `data/tests.json` di `nuxt.config.ts` — menambah tes aktif tidak perlu mengubah konfigurasi.
+- Rute yang di-_prerender_ dibaca langsung dari `data/tests.json` di `nuxt.config.ts` — menambah tes aktif tidak perlu mengubah konfigurasi.
 
 ---
 
@@ -127,13 +128,13 @@ Payload yang rusak atau berasal dari versi skema lama (`version` tidak cocok) ak
 
 ## Tech stack
 
-| Bagian | Pilihan | Catatan |
-|---|---|---|
-| Framework | Nuxt 3.21 (mode SSG) | `nuxt generate`, seluruh rute di-prerender jadi HTML statis. |
-| UI | Nuxt UI v2 | Versi 2 dipilih karena PRD mensyaratkan Tailwind v3; Nuxt UI v3+ sudah memakai Tailwind v4. |
-| Styling | Tailwind CSS v3 | Palet brand di `tailwind.config.ts`. |
-| Bahasa | TypeScript strict | `npm run typecheck` bersih tanpa error. |
-| State | `useState` + `localStorage` | Lewat `usePersistentState`. |
+| Bagian    | Pilihan                     | Catatan                                                                                     |
+| --------- | --------------------------- | ------------------------------------------------------------------------------------------- |
+| Framework | Nuxt 3.21 (mode SSG)        | `nuxt generate`, seluruh rute di-prerender jadi HTML statis.                                |
+| UI        | Nuxt UI v2                  | Versi 2 dipilih karena PRD mensyaratkan Tailwind v3; Nuxt UI v3+ sudah memakai Tailwind v4. |
+| Styling   | Tailwind CSS v3             | Palet brand di `tailwind.config.ts`.                                                        |
+| Bahasa    | TypeScript strict           | `npm run typecheck` bersih tanpa error.                                                     |
+| State     | `useState` + `localStorage` | Lewat `usePersistentState`.                                                                 |
 
 ### Desain
 

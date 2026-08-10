@@ -156,7 +156,7 @@ useHead({ title: `Hasil ${test.title} — Satu Persen` })
                 height="1080"
                 class="h-full w-full object-cover"
                 @error="markTraitImageFailed"
-              >
+              />
             </div>
 
             <div class="flex items-start gap-4 p-6">
@@ -196,13 +196,7 @@ useHead({ title: `Hasil ${test.title} — Satu Persen` })
             >
               Ulangi Tes
             </UButton>
-            <UButton
-              to="/psikotes"
-              size="xl"
-              color="white"
-              variant="ghost"
-              class="justify-center"
-            >
+            <UButton to="/psikotes" size="xl" color="white" variant="ghost" class="justify-center">
               Jelajahi Tes Lain
             </UButton>
           </div>

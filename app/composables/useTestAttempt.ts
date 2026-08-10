@@ -36,7 +36,11 @@ function isTestAttempt(value: unknown): value is TestAttempt {
 export function useTestAttempt(testId: string) {
   const { questions } = useTestQuestions(() => testId)
 
-  const { state: attempt, isHydrated, clear } = usePersistentState<TestAttempt>(
+  const {
+    state: attempt,
+    isHydrated,
+    clear,
+  } = usePersistentState<TestAttempt>(
     storageKey(testId),
     () => ({
       version: ATTEMPT_VERSION,
@@ -72,9 +76,7 @@ export function useTestAttempt(testId: string) {
 
   /** 0–100. Reflects questions answered, not questions visited. */
   const progress = computed(() =>
-    totalQuestions.value === 0
-      ? 0
-      : Math.round((answeredCount.value / totalQuestions.value) * 100),
+    totalQuestions.value === 0 ? 0 : Math.round((answeredCount.value / totalQuestions.value) * 100),
   )
 
   const isFirstQuestion = computed(() => currentIndex.value === 0)

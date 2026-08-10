@@ -86,6 +86,5 @@ const isOpen = ref(false)
         </div>
       </li>
     </ol>
-
   </div>
 </template>

@@ -22,9 +22,7 @@ const NuxtLinkComponent = resolveComponent('NuxtLink')
 const rootComponent = computed(() => (isLocked.value ? 'div' : NuxtLinkComponent))
 
 /** Only NuxtLink understands `to`; a div would just get a stray attribute. */
-const rootProps = computed(() =>
-  isLocked.value ? {} : { to: `/psikotes/${props.test.id}` },
-)
+const rootProps = computed(() => (isLocked.value ? {} : { to: `/psikotes/${props.test.id}` }))
 
 /**
  * Falls back to the text-only card layout when the artwork is missing — not
@@ -67,9 +65,11 @@ function notifyComingSoon() {
         decoding="async"
         class="h-full w-full object-cover"
         @error="markFailed"
-      >
+      />
       <!-- Softens the seam between artwork and card body. -->
-      <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-ink-950/60 to-transparent" />
+      <div
+        class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-ink-950/60 to-transparent"
+      />
     </div>
 
     <!--
@@ -80,15 +80,12 @@ function notifyComingSoon() {
     -->
     <div class="relative flex flex-1 flex-col gap-4 p-6">
       <!--
-        Base layer: title and metadata. Fades back as the overlay comes up.
-
-        Gated to `sm`, matching the overlay. Below that the overlay never
-        appears, so an ungated fade just empties the card — and on touch the
-        hover state sticks after a tap, leaving it blank until the user taps
-        somewhere else.
+        Base layer, fading back as the overlay rises. Gated to `sm` like the
+        overlay: below that nothing replaces it, and a sticky touch hover would
+        leave the card blank.
       -->
       <div
-        class="flex flex-1 flex-col gap-4 transition-opacity duration-300 sm:group-hover:opacity-0 sm:group-focus-within:opacity-0"
+        class="flex flex-1 flex-col gap-4 transition-opacity duration-300 sm:group-focus-within:opacity-0 sm:group-hover:opacity-0"
       >
         <div class="flex items-start justify-between gap-3">
           <UBadge variant="soft" color="primary" size="xs" class="font-semibold">
@@ -160,19 +157,12 @@ function notifyComingSoon() {
     </div>
 
     <!--
-      Reveal overlay. Sits at card level, not inside the content block, so it
-      covers the header image too — on hover the card shows the description
-      only, not the artwork.
-
-      `pointer-events-none` is essential: without it the overlay would eat the
-      click that should follow the link. The CTA above carries `z-20` and so
-      still renders on top and stays clickable.
-
-      `group-focus-within` mirrors the hover state for keyboard users, who never
-      trigger :hover and would otherwise never see the description.
+      Reveal overlay, at card level so it covers the artwork too.
+      `pointer-events-none` keeps it from eating the link's click, and
+      `group-focus-within` mirrors hover for keyboard users.
     -->
     <div
-      class="pointer-events-none absolute inset-0 z-10 hidden translate-y-4 flex-col justify-center gap-3 bg-brand-500 px-6 pb-20 pt-6 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none sm:flex"
+      class="pointer-events-none absolute inset-0 z-10 hidden translate-y-4 flex-col justify-center gap-3 bg-brand-500 px-6 pb-20 pt-6 opacity-0 transition-all duration-300 ease-out group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none sm:flex"
     >
       <!-- Labels the panel so it reads as an explanation rather than a caption. -->
       <p

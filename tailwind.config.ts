@@ -32,6 +32,27 @@ export default <Partial<Config>>{
       borderRadius: {
         '4xl': '2rem',
       },
+      /*
+       * Extensions to Tailwind's 4px scale, so no size is written as an
+       * arbitrary value. `76` and `128` continue the same numbering (unit x 4px).
+       */
+      spacing: {
+        76: '19rem', // 304px — scatter stage height
+        128: '32rem', // 512px — large background glow
+      },
+      backgroundImage: {
+        /*
+         * Benefit card: a yellow body with the page background shading its
+         * bottom-right corner. Two layers on one element rather than a
+         * `::before` overlay, which would paint over the card's own text.
+         */
+        'benefit-card':
+          'linear-gradient(to top left, rgba(13,13,26,0.4), transparent 55%), linear-gradient(to bottom right, #fce047, #f5c518)',
+      },
+      fontSize: {
+        '2xs': ['0.625rem', { lineHeight: '0.875rem' }], // 10px — stat labels on mobile
+        '4.5xl': ['2.5rem', { lineHeight: '1.1' }], // 40px — headline between 4xl and 5xl
+      },
       keyframes: {
         'fade-up': {
           '0%': { opacity: '0', transform: 'translateY(12px)' },

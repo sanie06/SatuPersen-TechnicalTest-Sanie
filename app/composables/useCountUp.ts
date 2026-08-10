@@ -55,8 +55,7 @@ export function useCountUp(
 
     if (visible) {
       animate()
-    }
-    else {
+    } else {
       cancelAnimationFrame(frame)
       current.value = 0
     }

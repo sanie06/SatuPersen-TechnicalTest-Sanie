@@ -20,11 +20,7 @@ const { el, current } = useCountUp(100, { duration: 5400, threshold: 0.3 })
 </script>
 
 <template>
-  <!--
-    No fixed width: the card shrinks to fit its label. With `whitespace-nowrap`
-    below, a fixed width risks the text spilling past the card's own edge the
-    moment the wording changes.
-  -->
+  <!-- Width follows the label; a fixed one would clip it if the wording changes. -->
   <div
     ref="el"
     class="rounded-xl border border-white/20 bg-white/10 p-3 shadow-lg shadow-ink-950/40 backdrop-blur-md"

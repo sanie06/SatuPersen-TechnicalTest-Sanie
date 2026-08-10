@@ -32,6 +32,6 @@ const { imageEl, showImage, markFailed } = useImageFallback(() => props.image)
     loading="lazy"
     class="h-6 w-6 object-contain"
     @error="markFailed"
-  >
+  />
   <UIcon v-else :name="icon" class="h-6 w-6 text-white/30" />
 </template>

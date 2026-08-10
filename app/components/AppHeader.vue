@@ -47,22 +47,22 @@ const isPsikotesActive = computed(() => route.path.startsWith('/psikotes'))
  * active item stayed white and hover did nothing. Owning the classes outright
  * avoids the specificity fight entirely.
  */
-const NAV_BASE =
-  'rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200'
+const NAV_BASE = 'rounded-full px-3 py-2 text-sm font-medium transition-colors duration-200'
 
 /** Colour alone marks the current page and hover — no background pill. */
 function navLinkClass(active: boolean) {
-  return active
-    ? `${NAV_BASE} text-brand-500`
-    : `${NAV_BASE} text-white/70 hover:text-brand-500`
+  return active ? `${NAV_BASE} text-brand-500` : `${NAV_BASE} text-white/70 hover:text-brand-500`
 }
 
 // Close the mobile drawer on navigation, otherwise it stays open over the new page.
-watch(() => route.fullPath, () => (isMenuOpen.value = false))
+watch(
+  () => route.fullPath,
+  () => (isMenuOpen.value = false),
+)
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 glass border-x-0 border-t-0">
+  <header class="glass sticky top-0 z-50 border-x-0 border-t-0">
     <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
       <NuxtLink to="/" class="flex items-center gap-2" aria-label="Satu Persen — beranda">
         <span
@@ -127,10 +127,7 @@ watch(() => route.fullPath, () => (isMenuOpen.value = false))
         >
           Psikotes Premium
         </button>
-        <NuxtLink
-          to="/psikotes"
-          :class="['flex items-center', navLinkClass(isPsikotesActive)]"
-        >
+        <NuxtLink to="/psikotes" :class="['flex items-center', navLinkClass(isPsikotesActive)]">
           Psikotes Gratis
         </NuxtLink>
       </nav>

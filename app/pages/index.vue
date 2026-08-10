@@ -44,7 +44,7 @@ const {
               1280px column 532 -> 48px + tighter tracking (needs 527)
           -->
           <h1
-            class="text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-[2.5rem] xl:text-5xl xl:tracking-tighter"
+            class="text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-4.5xl xl:text-5xl xl:tracking-tighter"
           >
             <!--
               The `{{ ' ' }}` between words is deliberate: Vue's compiler drops
@@ -55,17 +55,17 @@ const {
             <template v-for="(word, index) in headlineWords" :key="word.text"
               ><span
                 class="headline-word"
-                :class="word.brand ? 'text-brand-500 glow-cool' : 'glow-warm'"
+                :class="word.brand ? 'glow-cool text-brand-500' : 'glow-warm'"
                 >{{ word.text }}</span
-              ><br v-if="word.breakAfter"><template v-else>{{
+              ><br v-if="word.breakAfter" /><template v-else>{{
                 index < headlineWords.length - 1 ? ' ' : ''
               }}</template></template
             >
           </h1>
 
           <p class="max-w-lg text-pretty text-lg leading-relaxed text-gray-300">
-            Pahami diri minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari
-            dirimu terlalu berharga untuk dilewatkan.
+            Pahami diri minat, bakat, dan keunikan karaktermu. Karena setiap satu persen dari dirimu
+            terlalu berharga untuk dilewatkan.
           </p>
 
           <div class="flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6">
@@ -106,7 +106,7 @@ const {
             fetchpriority="high"
             class="relative w-full rounded-3xl"
             @error="markHeroFailed"
-          >
+          />
 
           <!--
             Floating overlay, pushed clear of the yellow blob into the dark
@@ -121,9 +121,7 @@ const {
             the section has not yet reached its max width, so the image column
             already touches the viewport edge and the card would spill past it.
           -->
-          <div
-            class="absolute -top-8 right-0 z-10 sm:-right-4 lg:right-0 xl:-right-8"
-          >
+          <div class="absolute -top-8 right-0 z-10 sm:-right-4 lg:right-0 xl:-right-8">
             <HeroProgressCard class="animate-float motion-reduce:animate-none" />
           </div>
         </div>
@@ -165,15 +163,15 @@ const {
             -->
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute -bottom-48 -left-40 h-[32rem] w-[32rem] rounded-full bg-ink-900 blur-3xl"
+              class="pointer-events-none absolute -bottom-48 -left-40 h-128 w-128 rounded-full bg-ink-900 blur-3xl"
             />
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute -bottom-28 left-0 h-56 w-[24rem] rounded-full bg-ink-900/70 blur-3xl"
+              class="pointer-events-none absolute -bottom-28 left-0 h-56 w-96 rounded-full bg-ink-900/70 blur-3xl"
             />
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute -top-24 right-0 h-[24rem] w-[24rem] rounded-full bg-ink-900/60 blur-3xl"
+              class="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-ink-900/60 blur-3xl"
             />
 
             <div class="relative">
@@ -206,11 +204,11 @@ const {
                  corner so the two stacked cards don't read as one repeated block. -->
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute -bottom-48 -right-40 h-[32rem] w-[32rem] rounded-full bg-ink-900 blur-3xl"
+              class="pointer-events-none absolute -bottom-48 -right-40 h-128 w-128 rounded-full bg-ink-900 blur-3xl"
             />
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute -top-24 left-0 h-[24rem] w-[24rem] rounded-full bg-ink-900/60 blur-3xl"
+              class="pointer-events-none absolute -top-24 left-0 h-96 w-96 rounded-full bg-ink-900/60 blur-3xl"
             />
 
             <div class="relative">
@@ -302,7 +300,7 @@ const {
                 loading="lazy"
                 class="relative w-full rounded-3xl"
                 @error="markCtaImageFailed"
-              >
+              />
             </div>
           </div>
         </div>

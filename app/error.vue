@@ -10,7 +10,7 @@ const isNotFound = computed(() => props.error.statusCode === 404)
   <NuxtLayout>
     <BaseSection width="narrow" spacing="loose">
       <div class="flex flex-col items-center gap-6 text-center">
-        <p class="text-7xl font-extrabold text-gradient-brand">{{ error.statusCode }}</p>
+        <p class="text-gradient-brand text-7xl font-extrabold">{{ error.statusCode }}</p>
 
         <h1 class="text-balance text-2xl font-extrabold tracking-tight sm:text-3xl">
           {{ isNotFound ? 'Halaman tidak ditemukan' : 'Ada yang tidak beres' }}

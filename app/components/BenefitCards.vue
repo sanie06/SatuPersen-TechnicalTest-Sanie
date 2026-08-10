@@ -39,7 +39,7 @@ const { el, isVisible, isReady } = useReveal({ threshold: 0.2 })
 <template>
   <div
     ref="el"
-    class="grid grid-cols-2 items-start gap-3 sm:gap-4 lg:relative lg:mx-auto lg:block lg:h-[19rem] lg:max-w-4xl"
+    class="grid grid-cols-2 items-start gap-3 sm:gap-4 lg:relative lg:mx-auto lg:block lg:h-76 lg:max-w-4xl"
   >
     <div
       v-for="(benefit, index) in benefits"
@@ -55,31 +55,13 @@ const { el, isVisible, isReady } = useReveal({ threshold: 0.2 })
       :style="{ animationDelay: `${index * DROP_DELAY_MS}ms` }"
     >
       <!--
-        Tilt sits on the inner element on purpose: `dropIn` animates
-        `transform`, so a rotation on the same element would be overwritten for
-        the whole animation and snap into place at the end. Hover lift is safe
-        here — Tailwind composes translate and rotate into one transform.
-
-        The gloss is TWO background layers on one element, not a `::before`
-        overlay: a positioned pseudo-element paints above the card's own text
-        and would wash it out. The first layer shades the bottom-right corner
-        with the page background colour, the second is the yellow body.
-
-        The shade stops at 0.4 alpha and the body copy is solid rather than
-        faded: measured against the darkest corner, 0.45 with faded copy came
-        out at 3.02 contrast, under the 4.5 WCAG AA needs. This pairing floors
-        at 4.78 while looking the same.
-
-        Fully opaque, which matters once the cards overlap — anything
-        translucent lets the card beneath show through and the two blocks of
-        text tangle into noise.
-
-        `lg:pr-16` clears the strip the next card overlaps, plus what the tilt
-        adds, so the covered part is only ever padding.
+        Card face. The tilt lives here, not on the parent: `dropIn` animates
+        `transform`, so sharing an element would wipe the rotation out for the
+        whole animation. `lg:pr-16` reserves the strip the next card overlaps.
       -->
       <div
         :class="layout[index]?.tilt"
-        class="flex h-full flex-col gap-2.5 rounded-3xl border border-brand-200/70 bg-[linear-gradient(to_top_left,rgba(13,13,26,0.4),transparent_55%),linear-gradient(to_bottom_right,#fce047,#f5c518)] p-4 text-ink-950 shadow-2xl shadow-brand-500/20 transition duration-300 hover:-translate-y-1 hover:border-white hover:shadow-brand-500/40 lg:gap-3 lg:p-6 lg:pr-16"
+        class="flex h-full flex-col gap-2.5 rounded-3xl border border-brand-200/70 bg-benefit-card p-4 text-ink-950 shadow-2xl shadow-brand-500/20 transition duration-300 hover:-translate-y-1 hover:border-white hover:shadow-brand-500/40 lg:gap-3 lg:p-6 lg:pr-16"
       >
         <div
           class="flex h-9 w-9 items-center justify-center rounded-2xl bg-ink-950/10 lg:h-11 lg:w-11"
@@ -116,6 +98,6 @@ const { el, isVisible, isReady } = useReveal({ threshold: 0.2 })
 }
 
 .drop-in {
-  animation: dropIn 2s cubic-bezier(0.25, 1.5, 0.40, 1) both;
+  animation: dropIn 2s cubic-bezier(0.25, 1.5, 0.4, 1) both;
 }
 </style>

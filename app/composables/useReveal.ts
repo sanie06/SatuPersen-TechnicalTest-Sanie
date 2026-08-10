@@ -66,8 +66,7 @@ export function useReveal(
         if (entry.intersectionRatio >= threshold) {
           isVisible.value = true
           if (once) observer?.disconnect()
-        }
-        else if (!once && !entry.isIntersecting) {
+        } else if (!once && !entry.isIntersecting) {
           // Fully off screen: rewind so the next pass plays the motion again.
           isVisible.value = false
         }

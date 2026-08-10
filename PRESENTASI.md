@@ -24,7 +24,7 @@ melarang dependensi tambahan."
 ### Langkah 2 — Katalog dan pencarian
 
 **Klik:** menu Psikotes → Psikotes Gratis. Ketik `big` di kolom cari, lalu
-kosongkan. Ganti filter kategori ke *Relasi*.
+kosongkan. Ganti filter kategori ke _Relasi_.
 
 **Tunjukkan:** hitungan "Menampilkan N tes" berubah tanpa halaman berpindah,
 dan URL tidak berubah.
@@ -73,8 +73,15 @@ hitung mundur **melanjutkan** angka sebelumnya — bukan kembali ke 5:00.
 **Lanjutkan:** buka DevTools → Application → Local Storage, tunjukkan objeknya:
 
 ```json
-{"version":3,"testId":"big-five","answers":{"1":4},"currentIndex":1,
- "startedAt":"2026-...","elapsedMs":4984,"completedAt":null}
+{
+  "version": 3,
+  "testId": "big-five",
+  "answers": { "1": 4 },
+  "currentIndex": 1,
+  "startedAt": "2026-...",
+  "elapsedMs": 4984,
+  "completedAt": null
+}
 ```
 
 ### Langkah 7 — Timer berhenti saat keluar
@@ -114,15 +121,15 @@ Deskripsi".
 Bedah dari Model ke View. Ini juga urutan yang membuat MVVM masuk akal saat
 dijelaskan.
 
-| Urutan | File | Satu kalimat penjelas |
-|---|---|---|
-| 1 | `app/types/` | Bentuk data. `TestAttempt` sekaligus skema localStorage. |
-| 2 | `data/tests.json` | Sumber katalog, di luar `app/`, dibaca juga saat build untuk menentukan rute prerender. |
-| 3 | `app/composables/usePersistentState.ts` | Satu-satunya tempat kode menyentuh localStorage. |
-| 4 | `app/composables/useTestAttempt.ts` | State pengerjaan: jawaban, posisi soal, babak waktu. |
-| 5 | `app/composables/useTestResult.ts` | Penilaian. Tidak ada komponen yang menghitung skor. |
-| 6 | `app/pages/psikotes/[id]/mulai.vue` | View: merender dan mengirim event, tidak menyimpan apa pun. |
-| 7 | `app/components/base/` | Komponen tanpa pengetahuan domain: section, heading, progress bar. |
+| Urutan | File                                    | Satu kalimat penjelas                                                                   |
+| ------ | --------------------------------------- | --------------------------------------------------------------------------------------- |
+| 1      | `app/types/`                            | Bentuk data. `TestAttempt` sekaligus skema localStorage.                                |
+| 2      | `data/tests.json`                       | Sumber katalog, di luar `app/`, dibaca juga saat build untuk menentukan rute prerender. |
+| 3      | `app/composables/usePersistentState.ts` | Satu-satunya tempat kode menyentuh localStorage.                                        |
+| 4      | `app/composables/useTestAttempt.ts`     | State pengerjaan: jawaban, posisi soal, babak waktu.                                    |
+| 5      | `app/composables/useTestResult.ts`      | Penilaian. Tidak ada komponen yang menghitung skor.                                     |
+| 6      | `app/pages/psikotes/[id]/mulai.vue`     | View: merender dan mengirim event, tidak menyimpan apa pun.                             |
+| 7      | `app/components/base/`                  | Komponen tanpa pengetahuan domain: section, heading, progress bar.                      |
 
 **Aturan yang bisa kamu sebut sebagai prinsip:** komponen tidak pernah
 menyentuh `localStorage` dan tidak pernah menghitung skor. Kalau ada yang

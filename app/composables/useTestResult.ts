@@ -70,10 +70,7 @@ export function useTestResult(testId: string) {
     return BIG_FIVE_TRAITS.map((trait: BigFiveTrait): TraitScore => {
       const traitQuestions = questions.value.filter((question) => question.trait === trait)
 
-      const score = traitQuestions.reduce(
-        (sum, question) => sum + (answers[question.id] ?? 0),
-        0,
-      )
+      const score = traitQuestions.reduce((sum, question) => sum + (answers[question.id] ?? 0), 0)
       const maxScore = traitQuestions.length * maxOptionScore.value
 
       return {

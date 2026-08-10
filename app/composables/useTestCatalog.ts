@@ -37,8 +37,7 @@ export function useTestCatalog() {
       // Match the description too, so searching "karier" finds relevant tests
       // even when the word isn't in the title.
       return (
-        test.title.toLowerCase().includes(query) ||
-        test.description.toLowerCase().includes(query)
+        test.title.toLowerCase().includes(query) || test.description.toLowerCase().includes(query)
       )
     })
   })
@@ -79,9 +78,7 @@ export function useTestCatalog() {
       .filter((test) => test.category === current?.category)
       .sort(playableFirst)
 
-    const rest = pool
-      .filter((test) => test.category !== current?.category)
-      .sort(playableFirst)
+    const rest = pool.filter((test) => test.category !== current?.category).sort(playableFirst)
 
     return [...sameCategory, ...rest].slice(0, limit)
   }

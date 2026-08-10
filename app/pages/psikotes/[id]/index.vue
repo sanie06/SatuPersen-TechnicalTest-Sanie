@@ -98,7 +98,7 @@ useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
           height="303"
           class="w-full rounded-3xl"
           @error="markFailed"
-        >
+        />
       </div>
 
       <div class="flex flex-col gap-4">
@@ -121,10 +121,7 @@ useHead({ title: `${test.title} — Psikotes Gratis Satu Persen` })
       <TestFactGrid :facts="facts" />
 
       <!-- Resume banner: only when a partly-finished attempt is in storage. -->
-      <div
-        v-if="showResume"
-        class="glass flex flex-col gap-4 rounded-3xl border-brand-500/30 p-6"
-      >
+      <div v-if="showResume" class="glass flex flex-col gap-4 rounded-3xl border-brand-500/30 p-6">
         <div class="flex items-start gap-3">
           <UIcon
             name="i-heroicons-arrow-path-rounded-square-20-solid"

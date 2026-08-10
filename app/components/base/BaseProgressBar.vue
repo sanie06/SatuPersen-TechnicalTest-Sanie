@@ -49,8 +49,7 @@ const heightClass = computed(() => (props.size === 'sm' ? 'h-1.5' : 'h-2.5'))
         class="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-brand-400 to-brand-500 transition-[width] duration-500 ease-out"
         :style="{ width: `${clamped}%` }"
       >
-        <!-- Clipped by the fill, so the highlight only ever travels across the
-             completed part rather than the empty track behind it. -->
+        <!-- Clipped by the fill, so the sheen only crosses the completed part. -->
         <span
           v-if="shine"
           aria-hidden="true"

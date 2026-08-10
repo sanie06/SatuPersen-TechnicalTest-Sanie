@@ -35,11 +35,11 @@ const {
   finish,
 } = useTestAttempt(testId)
 
-const { label: timeLabel, isExpired, isCritical } = useTestTimer(
-  startedAt,
-  elapsedMs,
-  test.durationMinutes,
-)
+const {
+  label: timeLabel,
+  isExpired,
+  isCritical,
+} = useTestTimer(startedAt, elapsedMs, test.durationMinutes)
 
 /**
  * Closing the tab or reloading never runs route middleware, so the sitting
@@ -163,9 +163,7 @@ useHead({ title: `Mengerjakan ${test.title} — Satu Persen` })
             :aria-label="`Sisa waktu ${timeLabel}`"
             :class="[
               'flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold tabular-nums transition-colors',
-              isCritical
-                ? 'bg-red-500/15 text-red-400'
-                : 'bg-white/5 text-white/70',
+              isCritical ? 'bg-red-500/15 text-red-400' : 'bg-white/5 text-white/70',
             ]"
           >
             <UIcon name="i-heroicons-clock-20-solid" class="h-4 w-4" />
@@ -231,10 +229,7 @@ useHead({ title: `Mengerjakan ${test.title} — Satu Persen` })
       </UButton>
     </div>
 
-    <p
-      v-if="isLastQuestion && !isComplete"
-      class="mt-4 text-center text-sm text-white/50"
-    >
+    <p v-if="isLastQuestion && !isComplete" class="mt-4 text-center text-sm text-white/50">
       Masih ada {{ totalQuestions - answeredCount }} soal yang belum terjawab.
     </p>
 

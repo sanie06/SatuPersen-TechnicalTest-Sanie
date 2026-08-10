@@ -74,26 +74,27 @@ export function usePersistentState<T>(
   // there — `onMounted` would warn and never fire. Skipping the whole block is
   // correct in that case: the page that owns the key already hydrated it, and
   // `useState` keeps that value in memory across client-side navigation.
-  if (getCurrentInstance()) onMounted(() => {
-    // Read from storage only once per page load. `useState` keeps the value in
-    // memory across client-side navigation, so a second read would be wasted
-    // work — and could overwrite newer in-memory state with a stale payload.
-    if (!isHydrated.value) {
-      const stored = read()
-      if (stored !== null) state.value = stored
+  if (getCurrentInstance())
+    onMounted(() => {
+      // Read from storage only once per page load. `useState` keeps the value in
+      // memory across client-side navigation, so a second read would be wasted
+      // work — and could overwrite newer in-memory state with a stale payload.
+      if (!isHydrated.value) {
+        const stored = read()
+        if (stored !== null) state.value = stored
 
-      isHydrated.value = true
-    }
+        isHydrated.value = true
+      }
 
-    // The watcher, unlike the read, must be registered by EVERY component that
-    // uses this key. Vue binds it to the calling component's scope and disposes
-    // it on unmount, so navigating detail -> mulai would otherwise leave the
-    // state with no watcher at all and silently stop persisting.
-    //
-    // Registered after the read above so restoring a stored value doesn't
-    // immediately trigger a redundant write-back of what we just loaded.
-    watch(state, (value) => write(value), { deep: true, flush: 'post' })
-  })
+      // The watcher, unlike the read, must be registered by EVERY component that
+      // uses this key. Vue binds it to the calling component's scope and disposes
+      // it on unmount, so navigating detail -> mulai would otherwise leave the
+      // state with no watcher at all and silently stop persisting.
+      //
+      // Registered after the read above so restoring a stored value doesn't
+      // immediately trigger a redundant write-back of what we just loaded.
+      watch(state, (value) => write(value), { deep: true, flush: 'post' })
+    })
 
   return { state, isHydrated, clear }
 }

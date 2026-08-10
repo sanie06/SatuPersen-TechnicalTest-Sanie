@@ -22,9 +22,7 @@ const props = withDefaults(
 )
 
 /** The list repeated `repeat` times — the content of a single copy. */
-const loopItems = computed(() =>
-  Array.from({ length: props.repeat }, () => props.items).flat(),
-)
+const loopItems = computed(() => Array.from({ length: props.repeat }, () => props.items).flat())
 </script>
 
 <template>
@@ -44,7 +42,11 @@ const loopItems = computed(() =>
         class="flex shrink-0 items-center"
         :aria-hidden="copy === 2 ? 'true' : undefined"
       >
-        <span v-for="(item, index) in loopItems" :key="`${item.lead}-${index}`" class="flex items-center">
+        <span
+          v-for="(item, index) in loopItems"
+          :key="`${item.lead}-${index}`"
+          class="flex items-center"
+        >
           <span class="whitespace-nowrap px-8 text-base font-bold text-ink-950 sm:px-12 sm:text-xl">
             {{ item.lead }}
             <span v-if="item.accent" class="text-brand-800">{{ item.accent }}</span>

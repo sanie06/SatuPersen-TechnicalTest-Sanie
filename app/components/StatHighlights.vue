@@ -30,7 +30,9 @@ defineProps<{ stats: PlatformStat[] }>()
       >
         <BaseCountUp :value="stat.value" />
       </dt>
-      <dd class="text-[0.625rem] font-medium leading-tight text-white/60 sm:text-xs lg:text-sm">{{ stat.label }}</dd>
+      <dd class="text-2xs font-medium leading-tight text-white/60 sm:text-xs lg:text-sm">
+        {{ stat.label }}
+      </dd>
     </div>
   </dl>
 </template>

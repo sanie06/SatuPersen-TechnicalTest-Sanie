@@ -25,7 +25,9 @@ const {
   isHydrated,
   isFinished,
   startedAt,
+  elapsedMs,
   start,
+  pause,
   selectAnswer,
   goTo,
   next,
@@ -35,8 +37,21 @@ const {
 
 const { label: timeLabel, isExpired, isCritical } = useTestTimer(
   startedAt,
+  elapsedMs,
   test.durationMinutes,
 )
+
+/**
+ * Closing the tab or reloading never runs route middleware, so the sitting
+ * would stay open and its seconds would keep counting while the page was gone.
+ * `pagehide` fires in both cases, including the back/forward cache path that
+ * `beforeunload` misses on mobile Safari.
+ */
+onMounted(() => {
+  const bank = () => pause()
+  window.addEventListener('pagehide', bank)
+  onBeforeUnmount(() => window.removeEventListener('pagehide', bank))
+})
 
 /**
  * Runs once the stored attempt has been read.
@@ -59,6 +74,8 @@ watch(
       return
     }
 
+    // Opens a new sitting. Time from earlier sittings is already banked in
+    // `elapsedMs`, so this resumes the countdown rather than restarting it.
     start()
   },
   { immediate: true },

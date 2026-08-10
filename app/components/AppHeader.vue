@@ -22,13 +22,11 @@ const psikotesItems = [
   [
     {
       label: 'Psikotes Premium',
-      icon: 'i-heroicons-sparkles-20-solid',
       // UDropdown renders this as a button, so no route is requested.
       click: notifyPremiumUnavailable,
     },
     {
       label: 'Psikotes Gratis',
-      icon: 'i-heroicons-gift-20-solid',
       to: '/psikotes',
     },
   ],
@@ -124,17 +122,15 @@ watch(() => route.fullPath, () => (isMenuOpen.value = false))
         </p>
         <button
           type="button"
-          :class="['flex w-full items-center gap-2', navLinkClass(false)]"
+          :class="['flex w-full items-center', navLinkClass(false)]"
           @click="notifyPremiumUnavailable"
         >
-          <UIcon name="i-heroicons-sparkles-20-solid" class="h-4 w-4" />
           Psikotes Premium
         </button>
         <NuxtLink
           to="/psikotes"
-          :class="['flex items-center gap-2', navLinkClass(isPsikotesActive)]"
+          :class="['flex items-center', navLinkClass(isPsikotesActive)]"
         >
-          <UIcon name="i-heroicons-gift-20-solid" class="h-4 w-4" />
           Psikotes Gratis
         </NuxtLink>
       </nav>

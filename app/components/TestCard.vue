@@ -79,9 +79,16 @@ function notifyComingSoon() {
       handles both layouts.
     -->
     <div class="relative flex flex-1 flex-col gap-4 p-6">
-      <!-- Base layer: title and metadata. Fades back as the overlay comes up. -->
+      <!--
+        Base layer: title and metadata. Fades back as the overlay comes up.
+
+        Gated to `sm`, matching the overlay. Below that the overlay never
+        appears, so an ungated fade just empties the card — and on touch the
+        hover state sticks after a tap, leaving it blank until the user taps
+        somewhere else.
+      -->
       <div
-        class="flex flex-1 flex-col gap-4 transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0"
+        class="flex flex-1 flex-col gap-4 transition-opacity duration-300 sm:group-hover:opacity-0 sm:group-focus-within:opacity-0"
       >
         <div class="flex items-start justify-between gap-3">
           <UBadge variant="soft" color="primary" size="xs" class="font-semibold">
@@ -165,7 +172,7 @@ function notifyComingSoon() {
       trigger :hover and would otherwise never see the description.
     -->
     <div
-      class="pointer-events-none absolute inset-0 z-10 hidden flex-col justify-center gap-3 bg-brand-500 px-6 pb-20 pt-6 opacity-0 transition-all duration-300 ease-out translate-y-4 sm:flex group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none motion-reduce:translate-y-0"
+      class="pointer-events-none absolute inset-0 z-10 hidden translate-y-4 flex-col justify-center gap-3 bg-brand-500 px-6 pb-20 pt-6 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none sm:flex"
     >
       <!-- Labels the panel so it reads as an explanation rather than a caption. -->
       <p

@@ -1,17 +1,19 @@
 /**
  * ViewModel — the countdown for a timed test.
  *
- * Time left is *derived* from the attempt's `startedAt` against the wall clock,
- * never stored as a remainder. That is what makes it survive a refresh without
- * handing back free time: reloading recomputes the same deadline, and closing
- * the tab for five minutes really does cost five minutes.
+ * Time spent is `elapsedMs` — banked from previous sittings — plus the wall
+ * clock since `startedAt`, the moment the current sitting began. A `null`
+ * `startedAt` means no sitting is open, so the countdown is frozen: leaving the
+ * question page stops the clock, and coming back resumes it where it was.
  *
- * A ticking `now` only exists to re-render the label once a second; the deadline
- * itself does not depend on the interval ever having run, so a throttled
- * background tab cannot stretch the limit.
+ * Within a sitting the elapsed portion still comes from the wall clock rather
+ * than being counted down in a variable, so a throttled or backgrounded tab
+ * cannot stretch the limit. The ticking `now` only exists to re-render the
+ * label once a second.
  */
 export function useTestTimer(
   startedAt: MaybeRefOrGetter<string | null>,
+  elapsedMs: MaybeRefOrGetter<number>,
   durationMinutes: MaybeRefOrGetter<number>,
 ) {
   const now = ref(Date.now())
@@ -19,24 +21,29 @@ export function useTestTimer(
 
   const totalMs = computed(() => toValue(durationMinutes) * 60_000)
 
-  const deadline = computed(() => {
+  /** Milliseconds burned in the sitting that is open right now, if any. */
+  const currentSittingMs = computed(() => {
     const start = toValue(startedAt)
-    if (!start) return null
+    if (!start) return 0
 
     const parsed = new Date(start).getTime()
-    // A hand-edited storage payload could carry an unparseable date; treat it
-    // as "not started" rather than instantly expiring the attempt.
-    return Number.isNaN(parsed) ? null : parsed + totalMs.value
+    // A hand-edited storage payload could carry an unparseable date; count it
+    // as nothing rather than instantly expiring the attempt.
+    return Number.isNaN(parsed) ? 0 : Math.max(0, now.value - parsed)
   })
 
-  /** Falls back to the full duration before the clock starts. */
-  const remainingMs = computed(() =>
-    deadline.value === null ? totalMs.value : Math.max(0, deadline.value - now.value),
-  )
+  const spentMs = computed(() => toValue(elapsedMs) + currentSittingMs.value)
 
-  const isRunning = computed(() => deadline.value !== null && remainingMs.value > 0)
+  const remainingMs = computed(() => Math.max(0, totalMs.value - spentMs.value))
 
-  const isExpired = computed(() => deadline.value !== null && remainingMs.value === 0)
+  /** True only while a sitting is open — paused is not running. */
+  const isRunning = computed(() => toValue(startedAt) !== null && remainingMs.value > 0)
+
+  /**
+   * Keyed on the clock having actually been used: a fresh attempt has spent
+   * nothing, and must not read as expired before the user has begun.
+   */
+  const isExpired = computed(() => spentMs.value > 0 && remainingMs.value === 0)
 
   /** 0–100, counting down. Drives the visual timer bar. */
   const percentageLeft = computed(() =>

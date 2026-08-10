@@ -65,9 +65,9 @@ const facts = computed(() => [
 const guidelines = computed(() => [
   'Luangkan waktumu sejenak. Cari tempat yang nyaman supaya kamu bisa fokus menjawab tanpa gangguan.',
   'Tidak ada jawaban yang benar atau salah. Pilih yang paling jujur mewakili dirimu, bukan yang terdengar paling baik.',
-  `Tes ini dibatasi waktu ${formatDuration(test.durationMinutes)}. Hitung mundur berjalan sejak halaman pengerjaan dibuka.`,
+  `Tes ini dibatasi waktu ${formatDuration(test.durationMinutes)}. Hitung mundur hanya berjalan selama kamu berada di halaman pengerjaan.`,
   'Jawab spontan. Jawaban pertama yang terlintas biasanya paling menggambarkan dirimu.',
-  'Progresmu tersimpan otomatis di browser. Kalau halaman ter-refresh atau kamu keluar sebentar, jawaban tidak hilang — tapi waktunya tetap berjalan.',
+  'Progresmu tersimpan otomatis di browser. Kalau kamu keluar sebentar, jawaban tetap aman dan hitung mundurnya ikut berhenti sampai kamu kembali.',
   'Begitu soal terakhir terjawab atau waktu habis, ringkasan hasilmu langsung muncul.',
 ])
 

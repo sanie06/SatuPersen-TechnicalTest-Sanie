@@ -308,7 +308,7 @@ const benefits = [
                 title="Cara Memaksimalkan Hasil Psikotes"
                 subtitle="Tanpa ribet, tanpa tekanan. Ambil waktu sejenak, dan progresmu akan otomatis tersimpan agar kamu bisa melanjutkannya kapan saja."
                 align="center"
-                class="mb-12"
+                class="mb-5 lg:mb-12"
               />
 
               <!-- No per-step cards: boxing them on top of the dark panel would

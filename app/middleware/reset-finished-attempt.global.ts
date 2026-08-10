@@ -1,4 +1,4 @@
-import { discardFinishedAttempt } from '~/composables/useTestAttempt'
+import { discardFinishedAttempt, pauseAttemptTimer } from '~/composables/useTestAttempt'
 
 /** `/psikotes/<id>` and everything under it; `null` for the catalog itself. */
 function testIdFromPath(path: string): string | null {
@@ -20,7 +20,19 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (import.meta.server) return
 
   const leaving = testIdFromPath(from.path)
-  if (!leaving || leaving === testIdFromPath(to.path)) return
+  if (!leaving) return
+
+  /*
+   * Leaving the question page freezes the countdown, even when the user stays
+   * within the same test — stepping back to the detail page must not keep
+   * charging them. Middleware runs before the page unmounts, so the persisting
+   * watcher is still alive to write the banked time.
+   */
+  if (from.path.endsWith('/mulai') && !to.path.endsWith('/mulai')) {
+    pauseAttemptTimer(leaving)
+  }
+
+  if (leaving === testIdFromPath(to.path)) return
 
   discardFinishedAttempt(leaving)
 })

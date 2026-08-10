@@ -15,15 +15,21 @@ export interface TestAttempt {
   /** Zero-based index of the question the user was last looking at. */
   currentIndex: number
   /**
-   * ISO timestamp of when the test was opened, set once and never rewritten
-   * until the attempt is reset.
+   * ISO timestamp of when the CURRENT sitting began, or `null` while the
+   * countdown is paused — the user has left the question page.
    *
-   * The countdown is derived from this rather than stored as "seconds left":
-   * a stored remainder would freeze while the page was closed, handing back
-   * free time on every reload. Anchoring to a wall-clock start means the limit
-   * keeps running whatever the user does with the tab.
+   * Paired with `elapsedMs` below, this makes the clock stop when the user
+   * steps away and resume where it left off. Time inside a sitting is still
+   * derived from the wall clock rather than counted down in a variable, so a
+   * throttled or backgrounded tab cannot stretch the limit.
    */
   startedAt: string | null
+  /**
+   * Milliseconds already spent across previous sittings, banked each time the
+   * user leaves the question page. Time in the current sitting is added on top
+   * and is not included here until it ends.
+   */
+  elapsedMs: number
   /**
    * ISO timestamp of when the attempt ended — either the user answered the
    * last question, or the time ran out. Non-null means the result is viewable

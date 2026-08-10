@@ -2,11 +2,10 @@ import type { Question, TestAttempt } from '~/types'
 
 /**
  * Bumped whenever `TestAttempt` changes shape; older payloads are discarded.
- * v2 added `startedAt` — a v1 payload has no start time, so its countdown
- * could not be reconstructed and the attempt is dropped rather than resumed
- * with a wrong clock.
+ * v3 split the clock into `elapsedMs` plus a per-sitting `startedAt`, so a v2
+ * payload's single start time would be read as one enormous sitting.
  */
-const ATTEMPT_VERSION = 2
+const ATTEMPT_VERSION = 3
 
 const storageKey = (testId: string) => `satupersen:attempt:${testId}`
 
@@ -20,6 +19,7 @@ function isTestAttempt(value: unknown): value is TestAttempt {
     typeof candidate.testId === 'string' &&
     typeof candidate.currentIndex === 'number' &&
     (candidate.startedAt === null || typeof candidate.startedAt === 'string') &&
+    typeof candidate.elapsedMs === 'number' &&
     typeof candidate.answers === 'object' &&
     candidate.answers !== null
   )
@@ -44,6 +44,7 @@ export function useTestAttempt(testId: string) {
       answers: {},
       currentIndex: 0,
       startedAt: null,
+      elapsedMs: 0,
       completedAt: null,
     }),
     { validate: isTestAttempt },
@@ -91,17 +92,41 @@ export function useTestAttempt(testId: string) {
    */
   const isFinished = computed(() => attempt.value.completedAt !== null)
 
-  /** Wall-clock start of the countdown; null until `start()` runs. */
+  /** Start of the current sitting; null while the countdown is paused. */
   const startedAt = computed(() => attempt.value.startedAt)
 
+  /** Time banked from previous sittings. */
+  const elapsedMs = computed(() => attempt.value.elapsedMs)
+
   /**
-   * Stamps the start time on first entry to the test. Deliberately a no-op
-   * afterwards: re-stamping on every mount would hand the user a fresh clock
-   * on each reload, which is exactly what the time limit is meant to prevent.
+   * Opens a sitting. A no-op if one is already open, so a re-render cannot
+   * silently restart the clock and hand back the time already spent.
    */
   function start(): void {
     if (attempt.value.startedAt) return
     attempt.value = { ...attempt.value, startedAt: new Date().toISOString() }
+  }
+
+  /**
+   * Closes the current sitting and banks its duration. Called when the user
+   * leaves the question page, so the countdown freezes rather than running on
+   * while they are somewhere else.
+   *
+   * Idempotent: with no sitting open there is nothing to bank, and calling it
+   * twice must not charge the same seconds again.
+   */
+  function pause(): void {
+    const start = attempt.value.startedAt
+    if (!start) return
+
+    const parsed = new Date(start).getTime()
+    const spent = Number.isNaN(parsed) ? 0 : Math.max(0, Date.now() - parsed)
+
+    attempt.value = {
+      ...attempt.value,
+      startedAt: null,
+      elapsedMs: attempt.value.elapsedMs + spent,
+    }
   }
 
   function selectAnswer(questionId: number, score: number): void {
@@ -155,7 +180,9 @@ export function useTestAttempt(testId: string) {
     hasProgress,
     isFinished,
     startedAt,
+    elapsedMs,
     start,
+    pause,
     selectAnswer,
     goTo,
     next,
@@ -180,4 +207,14 @@ export function useTestAttempt(testId: string) {
 export function discardFinishedAttempt(testId: string): void {
   const { isFinished, reset } = useTestAttempt(testId)
   if (isFinished.value) reset()
+}
+
+/**
+ * Freezes a test's countdown from outside a component — route middleware runs
+ * before the page unmounts, so the persisting watcher is still alive to write
+ * the banked time.
+ */
+export function pauseAttemptTimer(testId: string): void {
+  const { pause } = useTestAttempt(testId)
+  pause()
 }

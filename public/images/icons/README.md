@@ -12,6 +12,7 @@ as `/images/icons/foo.png` — no import, no build step.
 | `tempat-tenang.svg` | "Cara Memaksimalkan Hasil Psikotes", card 02 |
 | `refleksi-hasil.svg` | "Cara Memaksimalkan Hasil Psikotes", card 03 |
 | `diskusikan-hasil.svg` | "Cara Memaksimalkan Hasil Psikotes", card 04 |
+| `star-result.svg` | Result page, "Dimensi paling menonjol" callout |
 
 Any card without a file here keeps its Heroicon, so these can be added one at a
 time without the page breaking in between.

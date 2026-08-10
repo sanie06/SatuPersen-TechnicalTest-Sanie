@@ -163,7 +163,11 @@ useHead({ title: `Hasil ${test.title} — Satu Persen` })
               <div
                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-500/10"
               >
-                <UIcon name="i-heroicons-star-20-solid" class="h-5 w-5 text-brand-500" />
+                <FallbackIcon
+                  icon="i-heroicons-star-20-solid"
+                  image="/images/icons/star-result.svg"
+                  class="h-5 w-5 text-brand-500"
+                />
               </div>
               <div class="flex flex-col gap-1">
                 <p class="text-sm text-white/50">Dimensi paling menonjol</p>

@@ -63,7 +63,7 @@ const isOpen = ref(false)
           >
             {{ String(index + 1).padStart(2, '0') }}
           </span>
-          <StepIcon :icon="step.icon" :image="step.image" />
+          <FallbackIcon :icon="step.icon" :image="step.image" class="h-6 w-6 text-white/30" />
         </div>
 
         <h3 class="text-base font-bold lg:text-lg">{{ step.title }}</h3>
